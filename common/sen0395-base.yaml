@@ -8,7 +8,7 @@ light:
 
 output:
   - platform: template
-    id: mmwave_led_output
+    id: mmwave_led_output_1
     type: binary
     write_action:
       - switch.turn_off: mmwave_sensor
@@ -50,7 +50,7 @@ uart:
 switch:
   - platform: template
     name: mmWave sensor
-    id: mmwave_sensor
+    id: mmwave_sensor_1
     disabled_by_default: True
     entity_category: config
     optimistic: true
@@ -64,7 +64,7 @@ switch:
 
   - platform: template
     name: UART presence output
-    id: uart_presence_output
+    id: uart_presence_output_1
     entity_category: config
     disabled_by_default: true
     optimistic: true
@@ -111,7 +111,7 @@ switch:
 
 number:
   - platform: template
-    id: mmwave_distance
+    id: mmwave_distance_1
     name: mmWave distance
     icon: mdi:arrow-left-right
     entity_category: config
@@ -138,7 +138,7 @@ number:
     name: mmWave off latency
     icon: mdi:clock-end
     entity_category: config
-    id: mmwave_off_latency
+    id: mmwave_off_latency_1
     min_value: 1
     max_value: 600
     initial_value: 15
@@ -161,7 +161,7 @@ number:
   - platform: template
     name: mmWave on latency
     icon: mdi:clock-start
-    id: mmwave_on_latency
+    id: mmwave_on_latency_1
     entity_category: config
     min_value: 0
     max_value: 2
