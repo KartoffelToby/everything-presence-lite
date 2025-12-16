@@ -11,7 +11,7 @@ output:
     id: mmwave_led_output_1
     type: binary
     write_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - if:
           condition:
@@ -23,7 +23,7 @@ output:
       - delay: 1s
       - uart.write: "saveConfig"
       - delay: 3s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
 binary_sensor:
   - platform: gpio
@@ -69,21 +69,21 @@ switch:
     disabled_by_default: true
     optimistic: true
     turn_on_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: "setUartOutput 1 1"
       - delay: 1s
       - uart.write: "saveConfig"
       - delay: 3s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
     turn_off_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: "setUartOutput 1 0"
       - delay: 1s
       - uart.write: "saveConfig"
       - delay: 3s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
   - platform: template
     name: UART target output
@@ -93,21 +93,21 @@ switch:
     optimistic: true
     assumed_state: false
     turn_on_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: "setUartOutput 2 1 1 1"
       - delay: 1s
       - uart.write: "saveConfig"
       - delay: 3s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
     turn_off_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: "setUartOutput 2 0"
       - delay: 1s
       - uart.write: "saveConfig"
       - delay: 3s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
 number:
   - platform: template
@@ -124,7 +124,7 @@ number:
     unit_of_measurement: cm
     mode: slider
     set_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: !lambda int cm = (int)ceil(x / 15.0);
           std::string cms = "detRangeCfg -1 0 " + to_string(cm);
@@ -132,7 +132,7 @@ number:
       - delay: 1s
       - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
       - delay: 1s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
   - platform: template
     name: mmWave off latency
@@ -148,7 +148,7 @@ number:
     unit_of_measurement: seconds
     mode: slider
     set_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: !lambda |-
           std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
@@ -156,7 +156,7 @@ number:
       - delay: 1s
       - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
       - delay: 1s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
   - platform: template
     name: mmWave on latency
@@ -172,7 +172,7 @@ number:
     unit_of_measurement: seconds
     mode: slider
     set_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: !lambda |-
           std::string mss = "setLatency " + to_string(id(mmwave_on_latency).state) + " " + to_string(id(mmwave_off_latency).state);
@@ -180,7 +180,7 @@ number:
       - delay: 1s
       - uart.write: "saveCfg 0x45670123 0xCDEF89AB 0x956128C6 0xDF54AC89"
       - delay: 1s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
   - platform: template
     name: mmWave sensitivity
@@ -194,7 +194,7 @@ number:
     step: 1
     restore_value: true
     set_action:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write:
           !lambda std::string mss = "setSensitivity " + to_string((int)x);
@@ -202,7 +202,7 @@ number:
       - delay: 1s
       - uart.write: "saveConfig"
       - delay: 1s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
 
 button:
   - platform: restart
@@ -223,8 +223,8 @@ button:
     disabled_by_default: true
     entity_category: config
     on_press:
-      - switch.turn_off: mmwave_sensor
+      - switch.turn_off: mmwave_sensor_1
       - delay: 1s
       - uart.write: "resetCfg"
       - delay: 3s
-      - switch.turn_on: mmwave_sensor
+      - switch.turn_on: mmwave_sensor_1
