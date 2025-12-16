@@ -28,7 +28,7 @@ output:
 binary_sensor:
   - platform: gpio
     name: Occupancy_1
-    id: mmwave
+    id: mmwave_1
     device_class: occupancy
     pin:
       number: GPIO19
