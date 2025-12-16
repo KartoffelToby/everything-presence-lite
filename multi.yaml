@@ -19,5 +19,5 @@ dashboard_import:
 packages:
   device_base: !include common/everything-presence-lite-base.yaml
   ld2450_base: !include common/ld2450-base.yaml
-  sen0395_base: !include common/sen0395-base.yaml
+  sen0395_base1: !include common/sen0395-base.yaml
   co2_base: !include common/modules/co2.yaml
